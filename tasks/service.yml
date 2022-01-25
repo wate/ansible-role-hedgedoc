@@ -1,0 +1,12 @@
+---
+- name: create/update systemd unit file
+  template:
+    src: hedgedoc.service.j2
+    dest: /lib/systemd/system/hedgedoc.service
+    mode: "0644"
+- name: hedgedoc is active and enabled on system startup
+  systemd:
+    daemon_reload: true
+    name: hedgedoc
+    state: started
+    enabled: true

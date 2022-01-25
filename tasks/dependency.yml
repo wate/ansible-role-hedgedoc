@@ -1,0 +1,12 @@
+---
+- name: add hedgedoc user
+  user:
+    name: "{{ hedgedoc_user }}"
+    system: true
+- name: create install directory
+  file:
+    path: "{{ hedgedoc_home }}"
+    owner: "{{ hedgedoc_user }}"
+    group: "{{ hedgedoc_user }}"
+    state: directory
+    mode: "0755"

@@ -1,0 +1,14 @@
+---
+- name: install hedgedoc
+  block:
+    - name: checkout source
+      git:
+        repo: https://github.com/hedgedoc/hedgedoc.git
+        dest: "{{ hedgedoc_home }}"
+        version: "{{ hedgedoc_version }}"
+    - name: install dependency packages
+      yarn:
+        path: "{{ hedgedoc_home }}"
+        production: "{{ hedgedoc_mode == 'production' }}"
+  become: true
+  become_user: "{{ hedgedoc_user }}"

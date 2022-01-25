@@ -1,0 +1,9 @@
+---
+hedgedoc_user: hedgedoc
+hedgedoc_home: /opt/hedgedoc
+hedgedoc_root: "{{ hedgedoc_home }}"
+hedgedoc_tmp_dir: "{{ hedgedoc_home }}/tmp"
+hedgedoc_config_dir: "{{ hedgedoc_home }}/config"
+
+hedgedoc_mode: production
+

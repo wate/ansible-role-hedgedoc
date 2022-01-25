@@ -1,0 +1,9 @@
+---
+- name: restart hedgedoc
+  systemd:
+    state: restarted
+    name: hedgedoc
+- name: reload hedgedoc
+  systemd:
+    state: reloaded
+    name: hedgedoc

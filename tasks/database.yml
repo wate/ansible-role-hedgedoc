@@ -1,0 +1,30 @@
+---
+- name: install database adapter(MySQL)
+  apt:
+    name:
+      - mariadb-client
+      - mariadb-server
+      - libmariadb-dev
+      - python{{ ansible_facts.distribution_major_version is version('11', '>=') | ternary('3', '')  }}-pymysql
+  when: hedgedoc_cfg[hedgedoc_mode]['db']['dialect'] in ['mysql', 'mariadb']
+- name: localhost database setting
+  block:
+    - name: create database
+      mysql_db:
+        name: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['database'] }}"
+        encoding: utf8mb4
+        collation: utf8mb4_unicode_ci
+        login_unix_socket: "{{ mariadb_unix_socket_path | default('/run/mysqld/mysqld.sock') }}"
+    - name: create database user
+      mysql_user:
+        name: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['username'] }}"
+        password: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['password'] }}"
+        host: "{{ item }}"
+        priv: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['database'] }}.*:ALL"
+        login_unix_socket: "{{ mariadb_unix_socket_path | default('/run/mysqld/mysqld.sock') }}"
+      loop:
+        - localhost
+        - 127.0.0.1
+  when:
+    - hedgedoc_cfg[hedgedoc_mode]['db']['dialect'] in ['mysql', 'mariadb']
+    - hedgedoc_cfg[hedgedoc_mode]['db']['host'] | default('localhost') in ['localhost', '127.0.0.1']

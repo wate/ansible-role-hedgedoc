@@ -1,0 +1,52 @@
+[Unit]
+Description=HedgeDoc - The best platform to write and share markdown.
+Documentation=https://docs.hedgedoc.org/
+After=network.target
+{% if hedgedoc_cfg[hedgedoc_mode]['db']['host'] | default('localhost') in ['localhost', '127.0.0.1'] -%}
+{% if hedgedoc_cfg[hedgedoc_mode]['db']['dialect'] == 'mariadb' -%}
+After=mariadb.service
+{% elif hedgedoc_cfg[hedgedoc_mode]['db']['dialect'] == 'mysql' -%}
+After=mysql.service
+{% elif hedgedoc_cfg[hedgedoc_mode]['db']['dialect'] == 'postgres' -%}
+After=postgresql.service
+{% endif %}
+{% endif %}
+
+[Service]
+Type=exec
+Environment=NODE_ENV={{ hedgedoc_mode}}
+Restart=always
+RestartSec=2s
+ExecStart=/usr/bin/yarn start --{{ hedgedoc_mode}}
+CapabilityBoundingSet=
+NoNewPrivileges=true
+PrivateDevices=true
+RemoveIPC=true
+LockPersonality=true
+ProtectControlGroups=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectClock=true
+ProtectHostname=true
+ProtectProc=noaccess
+RestrictRealtime=true
+RestrictSUIDSGID=true
+RestrictNamespaces=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
+
+# You may have to adjust these settings
+User={{ hedgedoc_user }}
+Group={{ hedgedoc_user }}
+WorkingDirectory={{ hedgedoc_home }}
+
+# Example: local storage for uploads and SQLite
+ReadWritePaths={{ hedgedoc_home }}/public/uploads
+
+[Install]
+WantedBy=multi-user.target
