@@ -1,16 +1,3 @@
 ---
-galaxy_info:
-  author: yoshiaki tanaka
-  description: setup HedgeDoc
-  license: MIT
-  namespace: wate
-  role_name: hedgedoc
-  min_ansible_version: 2.11
-  platforms:
-    - name: Debian
-      versions:
-        - bullseye
-        - buster
-  galaxy_tags: []
 dependencies:
   - nodejs
