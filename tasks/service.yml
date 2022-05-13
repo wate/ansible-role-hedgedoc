@@ -1,11 +1,11 @@
 ---
 - name: create/update systemd unit file
-  template:
+  ansible.builtin.template:
     src: hedgedoc.service.j2
     dest: /lib/systemd/system/hedgedoc.service
     mode: "0644"
 - name: hedgedoc is active and enabled on system startup
-  systemd:
+  ansible.builtin.systemd:
     daemon_reload: true
     name: hedgedoc
     state: started

@@ -1,9 +1,9 @@
 ---
 - name: restart hedgedoc
-  systemd:
+  ansible.builtin.systemd:
     state: restarted
     name: hedgedoc
 - name: reload hedgedoc
-  systemd:
+  ansible.builtin.systemd:
     state: reloaded
     name: hedgedoc

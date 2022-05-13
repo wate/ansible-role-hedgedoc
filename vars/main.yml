@@ -6,4 +6,3 @@ hedgedoc_tmp_dir: "{{ hedgedoc_home }}/tmp"
 hedgedoc_config_dir: "{{ hedgedoc_home }}/config"
 
 hedgedoc_mode: production
-

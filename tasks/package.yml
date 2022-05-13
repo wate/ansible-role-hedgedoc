@@ -2,7 +2,7 @@
 - name: install hedgedoc
   block:
     - name: checkout source
-      git:
+      ansible.builtin.git:
         repo: https://github.com/hedgedoc/hedgedoc.git
         dest: "{{ hedgedoc_home }}"
         version: "{{ hedgedoc_version }}"

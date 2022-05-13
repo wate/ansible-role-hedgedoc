@@ -1,4 +1,5 @@
+---
 skip_list:
-  - 'fqcn-builtins'
   - 'role-name'
-warn_list: []
+warn_list:
+  - 'experimental'

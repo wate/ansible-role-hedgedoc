@@ -1,10 +1,10 @@
 ---
 - name: add hedgedoc user
-  user:
+  ansible.builtin.user:
     name: "{{ hedgedoc_user }}"
     system: true
 - name: create install directory
-  file:
+  ansible.builtin.file:
     path: "{{ hedgedoc_home }}"
     owner: "{{ hedgedoc_user }}"
     group: "{{ hedgedoc_user }}"
