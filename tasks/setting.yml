@@ -1,6 +1,7 @@
 ---
 - name: load default config
-  ansible.builtin.command: cat {{ hedgedoc_home }}/config.json.example
+  ansible.builtin.command:
+    cmd: cat {{ hedgedoc_home }}/config.json.example
   changed_when: false
   register: result
 - name: set default config variable
