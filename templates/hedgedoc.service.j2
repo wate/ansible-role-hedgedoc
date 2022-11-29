@@ -17,10 +17,10 @@ Environment=NODE_ENV={{ hedgedoc_mode}}
 User={{ hedgedoc_user }}
 Group={{ hedgedoc_user }}
 WorkingDirectory={{ hedgedoc_home }}
-ReadWritePaths={{ hedgedoc_home }}/public/uploads
 ExecStart=/usr/bin/yarn start --{{ hedgedoc_mode}}
 Restart=always
 RestartSec=2s
+ReadWritePaths={{ hedgedoc_upload_dir }}
 
 [Install]
 WantedBy=multi-user.target
