@@ -1,14 +1,26 @@
 ---
-- name: install hedgedoc
+- name: Install hedgedoc
   block:
-    - name: checkout source
+    - name: Checkout source
       ansible.builtin.git:
         repo: https://github.com/hedgedoc/hedgedoc.git
         dest: "{{ hedgedoc_home }}"
         version: "{{ hedgedoc_version }}"
-    - name: install dependency packages
-      yarn:
-        path: "{{ hedgedoc_home }}"
-        production: "{{ hedgedoc_mode == 'production' }}"
+      register: git_result
+    - name: Install dependency packages && build
+      block:
+        - name: Install build dependency packages
+          ansible.builtin.command:
+            cmd: yarn install --frozen-lockfile
+            chdir: "{{ hedgedoc_home }}"
+        - name: Install dependency packages
+          ansible.builtin.command:
+            cmd: yarn build
+            chdir: "{{ hedgedoc_home }}"
+        - name: Install dependency packages
+          ansible.builtin.command:
+            cmd: yarn install --production=true --frozen-lockfile
+            chdir: "{{ hedgedoc_home }}"
+      when: git_result is changed
   become: true
   become_user: "{{ hedgedoc_user }}"

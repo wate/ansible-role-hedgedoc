@@ -1,5 +1,13 @@
 ---
-- name: create/update systemd unit file
+- name: Create socket file directory
+  ansible.builtin.file:
+    path: "{{ hedgedoc_cfg[hedgedoc_mode]['path'] | dirname }}"
+    owner: "{{ hedgedoc_user }}"
+    group: "{{ hedgedoc_user }}"
+    mode: "0755"
+    state: directory
+  when: hedgedoc_cfg[hedgedoc_mode]['path'] is defined
+- name: Create/update systemd unit file
   ansible.builtin.template:
     src: hedgedoc.service.j2
     dest: /lib/systemd/system/hedgedoc.service

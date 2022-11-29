@@ -1,18 +1,7 @@
 ---
-- name: load default config
-  ansible.builtin.command:
-    cmd: cat {{ hedgedoc_home }}/config.json.example
-  changed_when: false
-  register: result
-- name: set default config variable
-  ansible.builtin.set_fact:
-    default_hedgedoc_cfg: "{{ result.stdout | from_json }}"
-- name: combine hedgedoc config
-  ansible.builtin.set_fact:
-    hedgedoc_cfg: "{{ default_hedgedoc_cfg | combine(hedgedoc_cfg, recursive=True) }}"
-- name: add/update setting file
+- name: Add/update setting file
   block:
-    - name: add/update setting file
+    - name: Add/update setting file
       ansible.builtin.template:
         src: config.json.j2
         dest: "{{ hedgedoc_home }}/config.json"
