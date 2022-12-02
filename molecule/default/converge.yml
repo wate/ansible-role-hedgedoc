@@ -21,6 +21,9 @@
         - ansible_facts.os_family == 'RedHat'
         - ansible_facts.distribution_major_version is version('8', operator='>=')
   tasks:
+    - name: install git package
+      ansible.builtin.apt:
+        name: git
     - name: "Include role"
       ansible.builtin.include_role:
         name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') | basename }}"
