@@ -1,6 +1,12 @@
 ---
+## -------------
+## HedgeDocのバージョン/ブランチ
+## -------------
 hedgedoc_version: master
 
+## --------------
+## HedgeDocの設定
+## --------------
 hedgedoc_cfg:
   production:
     domain: change this
