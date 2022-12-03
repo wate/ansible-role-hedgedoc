@@ -18,6 +18,8 @@ platforms:
     pre_build_image: true
     # driver:vagrant
     box: wate/debian-11
+    memory: 4096
+    cpus: 2
 lint: |
   set -e
   yamllint .
@@ -29,6 +31,7 @@ provisioner:
   config_options:
     defaults:
       hash_behaviour: merge
+      stdout_callback: yaml
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
 # verifier:
