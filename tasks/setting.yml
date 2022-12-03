@@ -1,5 +1,7 @@
 ---
 - name: Add/update setting file
+  become: true
+  become_user: "{{ hedgedoc_user }}"
   block:
     - name: Add/update setting file
       ansible.builtin.template:
@@ -8,5 +10,3 @@
         mode: "0644"
       register: result
       notify: restart hedgedoc
-  become: true
-  become_user: "{{ hedgedoc_user }}"

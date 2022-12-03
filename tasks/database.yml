@@ -8,15 +8,18 @@
       - python{{ ansible_facts.distribution_major_version is version('11', '>=') | ternary('3', '') }}-pymysql
   when: hedgedoc_cfg[hedgedoc_mode]['db']['dialect'] in ['mysql', 'mariadb']
 - name: Localhost database setting
+  when:
+    - hedgedoc_cfg[hedgedoc_mode]['db']['dialect'] in ['mysql', 'mariadb']
+    - hedgedoc_cfg[hedgedoc_mode]['db']['host'] | default('localhost') in ['localhost', '127.0.0.1']
   block:
     - name: Create database
-      mysql_db:
+      community.mysql.mysql_db:
         name: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['database'] }}"
         encoding: utf8mb4
         collation: utf8mb4_unicode_ci
         login_unix_socket: "{{ mariadb_unix_socket_path | default('/run/mysqld/mysqld.sock') }}"
     - name: Create database user
-      mysql_user:
+      community.mysql.mysql_user:
         name: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['username'] }}"
         password: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['password'] }}"
         host: "{{ item }}"
@@ -25,6 +28,3 @@
       loop:
         - localhost
         - 127.0.0.1
-  when:
-    - hedgedoc_cfg[hedgedoc_mode]['db']['dialect'] in ['mysql', 'mariadb']
-    - hedgedoc_cfg[hedgedoc_mode]['db']['host'] | default('localhost') in ['localhost', '127.0.0.1']

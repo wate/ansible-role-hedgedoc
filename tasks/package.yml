@@ -1,5 +1,7 @@
 ---
 - name: Install hedgedoc
+  become: true
+  become_user: "{{ hedgedoc_user }}"
   block:
     - name: Checkout source
       ansible.builtin.git:
@@ -8,6 +10,7 @@
         version: "{{ hedgedoc_version }}"
       register: git_result
     - name: Install dependency packages && build
+      when: git_result is changed
       block:
         - name: Install build dependency packages
           ansible.builtin.command:
@@ -21,6 +24,3 @@
           ansible.builtin.command:
             cmd: yarn install --production=true --frozen-lockfile
             chdir: "{{ hedgedoc_home }}"
-      when: git_result is changed
-  become: true
-  become_user: "{{ hedgedoc_user }}"

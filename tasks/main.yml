@@ -1,5 +1,5 @@
 ---
-- name: find variable file
+- name: Find variable file
   ansible.builtin.set_fact:
     variable_file: "{{ lookup('first_found', params, errors='ignore') }}"
   vars:
@@ -10,21 +10,21 @@
         - "{{ ansible_facts.os_family }}.yml"
       paths:
         - vars
-- name: include variable file
+- name: Include variable file
   ansible.builtin.include_vars: "{{ variable_file }}"
   when: variable_file | length > 0
-- name: dependency tasks
+- name: Dependency tasks
   ansible.builtin.import_tasks: dependency.yml
   tags: dependency
-- name: install packages
+- name: Install packages
   ansible.builtin.import_tasks: package.yml
   tags: package
-- name: setup database
+- name: Setup database
   ansible.builtin.import_tasks: database.yml
   tags: database
-- name: create/update setting
+- name: Create/update setting
   ansible.builtin.import_tasks: setting.yml
   tags: setting
-- name: setup service
+- name: Setup service
   ansible.builtin.import_tasks: service.yml
   tags: service
