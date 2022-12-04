@@ -16,7 +16,7 @@
       community.mysql.mysql_db:
         name: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['database'] }}"
         encoding: utf8mb4
-        collation: utf8mb4_unicode_ci
+        collation: utf8mb4_general_ci
         login_unix_socket: "{{ mariadb_unix_socket_path | default('/run/mysqld/mysqld.sock') }}"
     - name: Create database user
       community.mysql.mysql_user:
