@@ -8,19 +8,21 @@
         repo: https://github.com/hedgedoc/hedgedoc.git
         dest: "{{ hedgedoc_home }}"
         version: "{{ hedgedoc_version }}"
+      notify: restart hedgedoc
       register: git_result
     - name: Install dependency packages && build
       when: git_result is changed
       block:
-        - name: Install build dependency packages
+        - name: Install dependency packages(build)
           ansible.builtin.command:
             cmd: yarn install --frozen-lockfile
             chdir: "{{ hedgedoc_home }}"
-        - name: Install dependency packages
+        - name: Execute build
           ansible.builtin.command:
             cmd: yarn build
             chdir: "{{ hedgedoc_home }}"
-        - name: Install dependency packages
+          notify: restart hedgedoc
+        - name: Install dependency packages(production)
           ansible.builtin.command:
             cmd: yarn install --production=true --frozen-lockfile
             chdir: "{{ hedgedoc_home }}"
