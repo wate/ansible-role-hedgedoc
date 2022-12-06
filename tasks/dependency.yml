@@ -1,5 +1,5 @@
 ---
-- name: Add hedgedoc user
+- name: Add HedgeDoc user
   ansible.builtin.user:
     name: "{{ hedgedoc_user }}"
     system: true

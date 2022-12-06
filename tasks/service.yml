@@ -13,7 +13,7 @@
     dest: /lib/systemd/system/hedgedoc.service
     mode: "0644"
   notify: restart hedgedoc
-- name: HedgeDoc is active and enabled on system startup
+- name: Service HedgeDoc is active and enabled on system startup
   ansible.builtin.systemd:
     daemon_reload: true
     name: hedgedoc
