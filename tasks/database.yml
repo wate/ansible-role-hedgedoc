@@ -1,30 +1,9 @@
 ---
-- name: Install database adapter(MySQL)
-  ansible.builtin.apt:
-    name:
-      - mariadb-client
-      - mariadb-server
-      - libmariadb-dev
-      - python{{ ansible_facts.distribution_major_version is version('11', '>=') | ternary('3', '') }}-pymysql
-  when: hedgedoc_cfg[hedgedoc_mode]['db']['dialect'] in ['mysql', 'mariadb']
-- name: Localhost database setting
-  when:
-    - hedgedoc_cfg[hedgedoc_mode]['db']['dialect'] in ['mysql', 'mariadb']
-    - hedgedoc_cfg[hedgedoc_mode]['db']['host'] | default('localhost') in ['localhost', '127.0.0.1']
-  block:
-    - name: Create database
-      community.mysql.mysql_db:
-        name: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['database'] }}"
-        encoding: utf8mb4
-        collation: utf8mb4_general_ci
-        login_unix_socket: "{{ mariadb_unix_socket_path | default('/run/mysqld/mysqld.sock') }}"
-    - name: Create database user
-      community.mysql.mysql_user:
-        name: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['username'] }}"
-        password: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['password'] }}"
-        host: "{{ item }}"
-        priv: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['database'] }}.*:ALL"
-        login_unix_socket: "{{ mariadb_unix_socket_path | default('/run/mysqld/mysqld.sock') }}"
-      loop:
-        - localhost
-        - 127.0.0.1
+- name: Setup database setting
+  ansible.builtin.include_tasks: database/{{ include_file_map[gitea_cfg['database']['DB_TYPE']] }}.yml
+  vars:
+    include_file_map:
+      mariadb: mysql
+      mysql: mysql
+      postgres: postgres
+  when: hedgedoc_cfg[hedgedoc_mode]['db']['host'] | default('localhost') in ['localhost', '127.0.0.1']

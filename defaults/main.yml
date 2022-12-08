@@ -24,6 +24,9 @@ hedgedoc_cfg:
       database: hedgedoc
       username: ""
       password: ""
+      ## MySQL or MariaDB database setting for localhost
+      # encoding: utf8mb4
+      # collation: utf8mb4_general_ci
     # facebook:
     #   clientID: change this
     #   clientSecret: change this
