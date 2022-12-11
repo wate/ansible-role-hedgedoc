@@ -1,9 +1,36 @@
 ---
+## @see https://ansible-lint.readthedocs.io/configuring/
 use_default_rules: true
+
+## 除外するディレクトリ/ファイル
+# exclude_paths:
+#   - .cache/
+#   - .github/
+#   - .devcontainer/
+#   - tests/
+
+## @see https://ansible-lint.readthedocs.io/rules/
+
+## 無効にするルール
 skip_list:
   - role-name
   - name[casing]
+
+## 警告として扱うルール
 warn_list:
+  - experimental
   - no-changed-when
   - no-handler
-  - experimental
+  - yaml[line-length]
+
+## autofix実行時に適用するルール
+# write_list:
+#   - all
+
+# List of additional collections to allow in only-builtins rule.
+# only_builtins_allow_collections:
+#   - example_ns.example_collection
+
+# List of additions modules to allow in only-builtins rule.
+# only_builtins_allow_modules:
+#   - example_module
