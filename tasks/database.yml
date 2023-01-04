@@ -1,6 +1,6 @@
 ---
 - name: Setup database setting
-  ansible.builtin.include_tasks: database/{{ include_file_map[gitea_cfg['database']['DB_TYPE']] }}.yml
+  ansible.builtin.include_tasks: database/{{ include_file_map[hedgedoc_cfg[hedgedoc_mode]['db']['dialect']] }}.yml
   vars:
     include_file_map:
       mariadb: mysql
