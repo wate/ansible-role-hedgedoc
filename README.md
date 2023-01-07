@@ -13,6 +13,8 @@ OS Platform
 Role Variables
 --------------
 
+設定方法の詳細については[defaults/main.yml](defaults/main.yml)のサンプルコードを参照してください。
+
 ### `hedgedoc_version`
 
 HedgeDocのバージョン/ブランチ
