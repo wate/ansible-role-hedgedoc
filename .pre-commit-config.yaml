@@ -16,7 +16,7 @@ repos:
       - id: no-commit-to-branch
         args: [--branch, master, --branch, main, --branch, staging]
   - repo: https://github.com/ansible/ansible-lint
-    rev: v6.10.2
+    rev: v6.11.0
     hooks:
       - id: ansible-lint
         args: [--write]
