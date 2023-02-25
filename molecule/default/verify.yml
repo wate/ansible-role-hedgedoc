@@ -1,9 +1,17 @@
 ---
+# code: language=ansible
 - name: Verify
   hosts: all
   gather_facts: false
   # check_mode: true
+  become: true
   tasks:
-    - name: Example assertion
+    ## サービスのテスト
+    - name: Gather service facts
+      ansible.builtin.service_facts:
+    - name: Assert service
       ansible.builtin.assert:
-        that: true
+        that:
+          - ansible_facts.services['hedgedoc.service']
+          - ansible_facts.services['hedgedoc.service']['state'] == 'running'
+          - ansible_facts.services['hedgedoc.service']['status'] == 'enabled'
