@@ -9,4 +9,4 @@
         dest: "{{ hedgedoc_home }}/config.json"
         mode: "0644"
       register: result
-      notify: restart hedgedoc
+      notify: Restart hedgedoc
