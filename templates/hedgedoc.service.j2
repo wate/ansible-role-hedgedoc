@@ -21,6 +21,27 @@ WorkingDirectory={{ hedgedoc_home }}
 ExecStart=/usr/bin/yarn start --{{ hedgedoc_mode }}
 Restart=always
 RestartSec=2s
+CapabilityBoundingSet=
+NoNewPrivileges=true
+PrivateDevices=true
+RemoveIPC=true
+LockPersonality=true
+ProtectControlGroups=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectKernelLogs=true
+ProtectClock=true
+ProtectHostname=true
+ProtectProc=noaccess
+RestrictRealtime=true
+RestrictSUIDSGID=true
+RestrictNamespaces=true
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+PrivateTmp=true
+# ProtectHome=true
+# ProtectSystem=strict
+SystemCallArchitectures=native
+SystemCallFilter=@system-service
 
 ReadWritePaths={{ hedgedoc_upload_dir }}
 
