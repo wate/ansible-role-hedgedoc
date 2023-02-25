@@ -17,7 +17,7 @@ Role Variables
 
 ### `hedgedoc_version`
 
-HedgeDocのバージョン/ブランチ
+HedgeDocのバージョン
 
 ### `hedgedoc_cfg`
 
