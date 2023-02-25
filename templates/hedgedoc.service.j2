@@ -13,13 +13,15 @@ After=postgresql.service
 {% endif %}
 
 [Service]
-Environment=NODE_ENV={{ hedgedoc_mode}}
+Type=exec
+Environment=NODE_ENV={{ hedgedoc_mode }}
 User={{ hedgedoc_user }}
-Group={{ hedgedoc_user }}
+Group={{ hedgedoc_group }}
 WorkingDirectory={{ hedgedoc_home }}
-ExecStart=/usr/bin/yarn start --{{ hedgedoc_mode}}
+ExecStart=/usr/bin/yarn start --{{ hedgedoc_mode }}
 Restart=always
 RestartSec=2s
+
 ReadWritePaths={{ hedgedoc_upload_dir }}
 
 [Install]
