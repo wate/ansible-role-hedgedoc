@@ -1,6 +1,5 @@
 ---
 hedgedoc_home: /opt/hedgedoc
-hedgedoc_root: "{{ hedgedoc_home }}"
 hedgedoc_user: hedgedoc
 hedgedoc_group: hedgedoc
 hedgedoc_upload_dir: "{{ hedgedoc_home }}/public/uploads"
