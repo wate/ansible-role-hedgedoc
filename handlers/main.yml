@@ -1,10 +1,10 @@
 ---
-- name: restart hedgedoc
+- name: Restart hedgedoc
   ansible.builtin.systemd:
     daemon_reload: true
     state: restarted
     name: hedgedoc
-- name: reload hedgedoc
+- name: Reload hedgedoc
   ansible.builtin.systemd:
     daemon_reload: true
     state: reloaded
