@@ -3,17 +3,17 @@
   hosts: all
   become: true
   pre_tasks:
-    - name: update cache(Debian)
+    - name: Update cache(Debian)
       ansible.builtin.apt:
         update_cache: true
       when: ansible_facts.os_family == 'Debian'
-    - name: update cache(RedHat 8 <)
+    - name: Update cache(RedHat 8 <)
       ansible.builtin.yum:
         update_cache: true
       when:
         - ansible_facts.os_family == 'RedHat'
         - ansible_facts.distribution_major_version is version('8', operator='<')
-    - name: update cache(RedHat 8 >=)
+    - name: Update cache(RedHat 8 >=)
       ansible.builtin.dnf:
         update_cache: true
       when:
