@@ -1,8 +1,8 @@
 ---
 ## -------------
-## HedgeDocのバージョン/ブランチ
+## HedgeDocのバージョン
 ## -------------
-hedgedoc_version: master
+hedgedoc_version: latest
 
 ## --------------
 ## HedgeDocの設定
