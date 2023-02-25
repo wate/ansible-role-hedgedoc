@@ -11,20 +11,31 @@
       paths:
         - vars
 - name: Include variable file
-  ansible.builtin.include_vars: "{{ variable_file }}"
+  ansible.builtin.include_vars:
+    file: "{{ variable_file }}"
   when: variable_file | length > 0
 - name: Dependency tasks
-  ansible.builtin.import_tasks: dependency.yml
-  tags: dependency
-- name: Install packages
-  ansible.builtin.import_tasks: package.yml
-  tags: package
-- name: Setup database
-  ansible.builtin.import_tasks: database.yml
-  tags: database
-- name: Create/update setting
-  ansible.builtin.import_tasks: setting.yml
-  tags: setting
+  ansible.builtin.import_tasks:
+    file: dependency.yml
+  tags:
+    - role_hedgedoc_dependency
+- name: Import packages
+  ansible.builtin.import_tasks:
+    file: package.yml
+  tags:
+    - role_hedgedoc_package
+- name: Import database task
+  ansible.builtin.import_tasks:
+    file: database.yml
+  tags:
+    - role_hedgedoc_database
+- name: Import setting task
+  ansible.builtin.import_tasks:
+    file: setting.yml
+  tags:
+    - role_hedgedoc_setting
 - name: Setup service
-  ansible.builtin.import_tasks: service.yml
-  tags: service
+  ansible.builtin.import_tasks:
+    file: service.yml
+  tags:
+    - role_hedgedoc_service
