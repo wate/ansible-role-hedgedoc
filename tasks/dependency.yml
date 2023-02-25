@@ -1,12 +1,17 @@
 ---
+- name: Add HedgeDoc group
+  ansible.builtin.group:
+    name: "{{ hedgedoc_group }}"
+    system: true
 - name: Add HedgeDoc user
   ansible.builtin.user:
     name: "{{ hedgedoc_user }}"
+    group: "{{ hedgedoc_group }}"
     system: true
 - name: Create install directory
   ansible.builtin.file:
     path: "{{ hedgedoc_home }}"
     owner: "{{ hedgedoc_user }}"
-    group: "{{ hedgedoc_user }}"
+    group: "{{ hedgedoc_group }}"
     state: directory
     mode: "0755"

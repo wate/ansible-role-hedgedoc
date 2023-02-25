@@ -1,7 +1,7 @@
 hedgedoc
 =================
 
-Setup HedgeDoc
+Setup HedgeDoc(work in progress)
 
 OS Platform
 -----------------
