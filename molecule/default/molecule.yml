@@ -22,10 +22,6 @@ platforms:
     box: wate/debian-11
     memory: 4096
     cpus: 2
-lint: |
-  set -e
-  yamllint .
-  ansible-lint
 provisioner:
   name: ansible
   options:
@@ -41,7 +37,6 @@ provisioner:
 scenario:
   test_sequence:
     - dependency
-    - lint
     - cleanup
     - destroy
     - syntax
