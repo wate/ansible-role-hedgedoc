@@ -8,6 +8,7 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
+        - bookworm
         - bullseye
 dependencies:
   - role: nodejs

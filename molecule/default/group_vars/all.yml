@@ -1,6 +1,4 @@
 ---
-nodejs_version: 16
-
 hedgedoc_cfg:
   production:
     domain: localhost

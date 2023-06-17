@@ -7,18 +7,10 @@
       ansible.builtin.apt:
         update_cache: true
       when: ansible_facts.os_family == 'Debian'
-    - name: Update cache(RedHat 8 <)
-      ansible.builtin.yum:
-        update_cache: true
-      when:
-        - ansible_facts.os_family == 'RedHat'
-        - ansible_facts.distribution_major_version is version('8', operator='<')
     - name: Update cache(RedHat 8 >=)
       ansible.builtin.dnf:
         update_cache: true
-      when:
-        - ansible_facts.os_family == 'RedHat'
-        - ansible_facts.distribution_major_version is version('8', operator='>=')
+      when: ansible_facts.os_family == 'RedHat'
   tasks:
     - name: Include roles
       ansible.builtin.include_role:
