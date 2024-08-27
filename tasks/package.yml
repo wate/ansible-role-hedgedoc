@@ -23,6 +23,6 @@
           - --strip-components=1
         remote_src: true
       notify: Restart hedgedoc
-    - name: Install HedgeDoc dependency npm packages
-      community.general.yarn:
-        path: "{{ hedgedoc_home }}"
+    # - name: Install HedgeDoc dependency npm packages
+    #   community.general.npm:
+    #     path: "{{ hedgedoc_home }}"

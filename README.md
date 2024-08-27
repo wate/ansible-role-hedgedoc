@@ -27,7 +27,8 @@ HedgeDocの設定
 Dependencies
 --------------
 
-- nodejs
+- [nodejs](https://github.com/wate/ansible-role-nodejs)
+
 Example Playbook
 --------------
 

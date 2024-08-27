@@ -14,7 +14,7 @@
     mode: "0644"
   notify: Restart hedgedoc
 - name: Service HedgeDoc is active and enabled on system startup
-  ansible.builtin.systemd:
+  ansible.builtin.systemd_service:
     daemon_reload: true
     name: hedgedoc
     state: started
