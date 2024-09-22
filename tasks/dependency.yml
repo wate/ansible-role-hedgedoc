@@ -10,7 +10,7 @@
     system: true
 - name: Create install directory
   ansible.builtin.file:
-    path: "{{ hedgedoc_home }}"
+    path: "{{ hedgedoc_root }}"
     owner: "{{ hedgedoc_user }}"
     group: "{{ hedgedoc_group }}"
     state: directory

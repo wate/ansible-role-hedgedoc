@@ -17,8 +17,8 @@ Type=exec
 Environment=NODE_ENV={{ hedgedoc_mode }}
 User={{ hedgedoc_user }}
 Group={{ hedgedoc_group }}
-WorkingDirectory={{ hedgedoc_home }}
-ExecStart=/usr/bin/yarn start --{{ hedgedoc_mode }}
+WorkingDirectory={{ hedgedoc_root }}
+ExecStart=/usr/bin/yarn start
 Restart=always
 RestartSec=2s
 CapabilityBoundingSet=
