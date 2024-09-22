@@ -14,15 +14,31 @@ OS Platform
 Role Variables
 --------------
 
-設定方法の詳細については[defaults/main.yml](defaults/main.yml)のサンプルコードを参照してください。
+### [defaults/main.yml](defaults/main.yml)
 
-### `hedgedoc_version`
+設定方法の詳細については[defaults/main.yml](defaults/main.yml)のサンプルコードなどを参照してください。
+
+#### `hedgedoc_version`
 
 HedgeDocのバージョン
 
-### `hedgedoc_cfg`
+#### `hedgedoc_cfg`
 
 HedgeDocの設定
+
+### [vars/main.yml](vars/main.yml)
+
+設定値については[vars/main.yml](vars/main.yml)を参照してください。
+
+#### `hedgedoc_home`
+
+#### `hedgedoc_user`
+
+#### `hedgedoc_group`
+
+#### `hedgedoc_upload_dir`
+
+#### `hedgedoc_mode`
 
 Dependencies
 --------------
