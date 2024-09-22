@@ -33,3 +33,8 @@
           - --strip-components=1
         remote_src: true
       notify: Restart hedgedoc
+    - name: Install/update all packages in package.json
+      community.general.yarn:
+        path: "{{ hedgedoc_root }}"
+        state: latest
+        production: "{{ hedgedoc_mode == 'production' }}"
