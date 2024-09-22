@@ -34,7 +34,6 @@
         remote_src: true
       notify: Restart hedgedoc
     - name: Install/update all packages in package.json
-      community.general.yarn:
-        path: "{{ hedgedoc_root }}"
-        state: latest
-        production: "{{ hedgedoc_mode == 'production' }}"
+      ansible.builtin.command:
+        cmd: yarn workspaces focus{% if hedgedoc_mode == 'production' %} --production{% endif %}
+        chdir: "{{ hedgedoc_root }}"
