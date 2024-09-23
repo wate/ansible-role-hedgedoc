@@ -2,7 +2,7 @@
 galaxy_info:
   role_name: hedgedoc
   author: yoshiaki tanaka
-  description: Setup HedgeDoc(work in progress)
+  description: Setup HedgeDoc
   license: Apache
   min_ansible_version: "2.16"
   platforms:
