@@ -10,32 +10,29 @@
         - "{{ ansible_facts.os_family }}.yml"
       paths:
         - vars
+  tags: role_hedgedoc_include_vars
 - name: Include variable file
   ansible.builtin.include_vars:
     file: "{{ variable_file }}"
   when: variable_file | length > 0
+  tags: role_hedgedoc_include_vars
 - name: Dependency tasks
   ansible.builtin.import_tasks:
     file: dependency.yml
-  tags:
-    - role_hedgedoc_dependency
+  tags: role_hedgedoc_dependency
 - name: Import packages
   ansible.builtin.import_tasks:
     file: package.yml
-  tags:
-    - role_hedgedoc_package
+  tags: role_hedgedoc_package
 - name: Import database task
   ansible.builtin.import_tasks:
     file: database.yml
-  tags:
-    - role_hedgedoc_database
+  tags: role_hedgedoc_database
 - name: Import setting task
   ansible.builtin.import_tasks:
     file: setting.yml
-  tags:
-    - role_hedgedoc_setting
+  tags: role_hedgedoc_setting
 - name: Setup service
   ansible.builtin.import_tasks:
     file: service.yml
-  tags:
-    - role_hedgedoc_service
+  tags: role_hedgedoc_service

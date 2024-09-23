@@ -4,10 +4,11 @@ galaxy_info:
   author: yoshiaki tanaka
   description: Setup HedgeDoc(work in progress)
   license: Apache
-  min_ansible_version: "2.13"
+  min_ansible_version: "2.16"
   platforms:
     - name: Debian
       versions:
+        - bookworm
         - bullseye
 dependencies:
   - role: nodejs

@@ -1,7 +1,8 @@
 ---
-hedgedoc_home: /opt/hedgedoc
+hedgedoc_root: /opt/hedgedoc
 hedgedoc_user: hedgedoc
 hedgedoc_group: hedgedoc
-hedgedoc_upload_dir: "{{ hedgedoc_home }}/public/uploads"
+
+hedgedoc_repo: hedgedoc/hedgedoc
 
 hedgedoc_mode: production

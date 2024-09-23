@@ -6,12 +6,34 @@
   # check_mode: true
   become: true
   tasks:
-    ## サービスのテスト
+    ## テストの前処理
+    - name: Gather package facts
+      ansible.builtin.package_facts:
+        manager: auto
     - name: Gather service facts
       ansible.builtin.service_facts:
+    - name: Gather facts on listening ports
+      community.general.listen_ports_facts:
+        command: ss
+      become: true
+    - name: Set assert variables
+      ansible.builtin.set_fact:
+        listen_tcp_posts: "{{ ansible_facts.tcp_listen | map(attribute='port') | unique | sort | list }}"
+        listen_udp_posts: "{{ ansible_facts.udp_listen | map(attribute='port') | unique | sort | list }}"
+    ## サービスの検証
     - name: Assert service
       ansible.builtin.assert:
         that:
           - ansible_facts.services['hedgedoc.service']
           - ansible_facts.services['hedgedoc.service']['state'] == 'running'
           - ansible_facts.services['hedgedoc.service']['status'] == 'enabled'
+    ## 待ち受けポートの検証
+    - name: Check unix domain socket file
+      ansible.builtin.stat:
+        path: /var/run/hedgedoc/hedgedoc.sock
+      register: sock_file_result
+    - name: Assert service
+      ansible.builtin.assert:
+        that:
+          - sock_file_result.stat.exists
+          - sock_file_result.stat.issock

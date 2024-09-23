@@ -6,7 +6,7 @@
     - name: Add/update setting file
       ansible.builtin.template:
         src: config.json.j2
-        dest: "{{ hedgedoc_home }}/config.json"
+        dest: "{{ hedgedoc_root }}/config.json"
         mode: "0644"
       register: result
       notify: Restart hedgedoc

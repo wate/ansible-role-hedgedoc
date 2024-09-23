@@ -8,25 +8,44 @@ OS Platform
 
 ### Debian
 
+- bookworm
 - bullseye
 
 Role Variables
 --------------
 
-設定方法の詳細については[defaults/main.yml](defaults/main.yml)のサンプルコードを参照してください。
+### [defaults/main.yml](defaults/main.yml)
 
-### `hedgedoc_version`
+設定方法の詳細については[defaults/main.yml](defaults/main.yml)のサンプルコードなどを参照してください。
+
+#### `hedgedoc_version`
 
 HedgeDocのバージョン
 
-### `hedgedoc_cfg`
+#### `hedgedoc_cfg`
 
-HedgeDocの設定
+HedgeDocの設定  
+@see https://docs.hedgedoc.org/configuration/
+
+### [vars/main.yml](vars/main.yml)
+
+設定値については[vars/main.yml](vars/main.yml)を参照してください。
+
+#### `hedgedoc_root`
+
+#### `hedgedoc_user`
+
+#### `hedgedoc_group`
+
+#### `hedgedoc_repo`
+
+#### `hedgedoc_mode`
 
 Dependencies
 --------------
 
-- nodejs
+- [nodejs](https://github.com/wate/ansible-role-nodejs)
+
 Example Playbook
 --------------
 
