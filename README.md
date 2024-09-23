@@ -27,6 +27,11 @@ HedgeDocのバージョン
 HedgeDocの設定  
 @see https://docs.hedgedoc.org/configuration/
 
+#### `hedgedoc_envs`
+
+HedgeDocの環境変数  
+@see https://docs.hedgedoc.org/configuration/
+
 ### [vars/main.yml](vars/main.yml)
 
 設定値については[vars/main.yml](vars/main.yml)を参照してください。

@@ -1,4 +1,10 @@
 ---
+- name: Create/update envirnment file
+  ansible.builtin.template:
+    src: environment_file.j2
+    dest: /etc/default/hedgedoc
+    mode: "0644"
+  notify: Restart hedgedoc
 - name: Create socket file directory
   ansible.builtin.file:
     path: "{{ hedgedoc_cfg[hedgedoc_mode]['path'] | dirname }}"
