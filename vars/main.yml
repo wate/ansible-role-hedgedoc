@@ -2,7 +2,6 @@
 hedgedoc_root: /opt/hedgedoc
 hedgedoc_user: hedgedoc
 hedgedoc_group: hedgedoc
-hedgedoc_upload_dir: "{{ hedgedoc_root }}/public/uploads"
 
 hedgedoc_repo: hedgedoc/hedgedoc
 

@@ -19,3 +19,11 @@
     name: hedgedoc
     state: started
     enabled: true
+- name: Allow HedgeDoc port
+  community.general.ufw:
+    rule: allow
+    port: "{{ hedgedoc_cfg[hedgedoc_mode]['port'] | default(3000) }}"
+    proto: tcp
+  when:
+    - hedgedoc_cfg[hedgedoc_mode]['path'] is undefined
+    - hedgedoc_allow_connect_other_host | default(false)

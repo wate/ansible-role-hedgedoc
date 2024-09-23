@@ -24,19 +24,20 @@ HedgeDocのバージョン
 
 #### `hedgedoc_cfg`
 
-HedgeDocの設定
+HedgeDocの設定  
+@see https://docs.hedgedoc.org/configuration/
 
 ### [vars/main.yml](vars/main.yml)
 
 設定値については[vars/main.yml](vars/main.yml)を参照してください。
 
-#### `hedgedoc_home`
+#### `hedgedoc_root`
 
 #### `hedgedoc_user`
 
 #### `hedgedoc_group`
 
-#### `hedgedoc_upload_dir`
+#### `hedgedoc_repo`
 
 #### `hedgedoc_mode`
 
