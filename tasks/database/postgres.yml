@@ -9,12 +9,12 @@
   become: true
   become_user: postgres
   block:
-    - name: Create database
-      community.postgresql.postgresql_db:
-        name: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['database'] }}"
-        encoding: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['encoding'] | default('UTF8') }}"
     - name: Create database user
       community.postgresql.postgresql_user:
         name: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['username'] }}"
         password: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['password'] }}"
-        db: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['database'] }}"
+    - name: Create database
+      community.postgresql.postgresql_db:
+        name: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['database'] }}"
+        owner: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['username'] }}"
+        encoding: "{{ hedgedoc_cfg[hedgedoc_mode]['db']['encoding'] | default('UTF8') }}"

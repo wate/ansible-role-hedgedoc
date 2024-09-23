@@ -5,5 +5,15 @@
 # Ansible retry files
 *.retry
 
+### direnv ###
+.direnv
+.envrc
+
+### dotenv ###
+.env
+
 ### Molecule ###
 .env.yml
+
+### VisualStudioCode ###
+/.vscode/

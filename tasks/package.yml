@@ -2,27 +2,38 @@
 - name: Set Install version variable
   when: hedgedoc_version == 'latest'
   block:
+    - name: Set Github API request header
+      ansible.builtin.set_fact:
+        github_api_request_headers:
+          Accept: application/vnd.github+json
+    - name: Merge Github API Authorization request header
+      ansible.builtin.set_fact:
+        github_api_request_headers: "{{ github_api_request_headers | combine(merge_reauest_header) }}"
+      vars:
+        merge_reauest_header:
+          Authorization: Bearer {{ lookup('env', 'GITHUB_TOKEN') }}
+      when: lookup('env', 'GITHUB_TOKEN') | length > 0
     - name: Get latest version
       ansible.builtin.uri:
-        url: https://api.github.com/repos/hedgedoc/hedgedoc/releases/latest
-        headers:
-          Accept: application/vnd.github+json
-      register: latest_releases
+        url: https://api.github.com/repos/{{ hedgedoc_repo }}/releases/latest
+        headers: "{{ github_api_request_headers }}"
+      register: latest_release
     - name: Set hedgedoc_version variable
       ansible.builtin.set_fact:
-        hedgedoc_version: "{{ latest_releases.json.tag_name }}"
+        hedgedoc_version: "{{ latest_release.json.tag_name }}"
 - name: Setup HedgeDoc
   become: true
   become_user: "{{ hedgedoc_user }}"
   block:
     - name: Install/update HedgeDoc
       ansible.builtin.unarchive:
-        src: https://github.com/hedgedoc/hedgedoc/releases/download/{{ hedgedoc_version }}/hedgedoc-{{ hedgedoc_version }}.tar.gz
-        dest: "{{ hedgedoc_home }}"
+        src: https://github.com/{{ hedgedoc_repo }}/releases/download/{{ hedgedoc_version }}/hedgedoc-{{ hedgedoc_version }}.tar.gz
+        dest: "{{ hedgedoc_root }}"
         extra_opts:
           - --strip-components=1
         remote_src: true
       notify: Restart hedgedoc
-    - name: Install HedgeDoc dependency npm packages
-      community.general.yarn:
-        path: "{{ hedgedoc_home }}"
+    - name: Install/update all packages in package.json
+      ansible.builtin.command:
+        cmd: yarn workspaces focus{% if hedgedoc_mode == 'production' %} --production{% endif %}
+        chdir: "{{ hedgedoc_root }}"

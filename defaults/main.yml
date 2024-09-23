@@ -6,6 +6,7 @@ hedgedoc_version: latest
 
 ## --------------
 ## HedgeDocの設定
+## @see https://docs.hedgedoc.org/configuration/
 ## --------------
 hedgedoc_cfg:
   production:
@@ -98,3 +99,5 @@ hedgedoc_cfg:
     # azure:
     #   connectionString: change this
     #   container: change this
+
+# hedgedoc_allow_connect_other_host: false
