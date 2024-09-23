@@ -15,6 +15,7 @@ After=postgresql.service
 [Service]
 Type=simple
 Environment=NODE_ENV={{ hedgedoc_mode }}
+EnvironmentFile=/etc/default/hedgedoc
 User={{ hedgedoc_user }}
 Group={{ hedgedoc_group }}
 WorkingDirectory={{ hedgedoc_root }}

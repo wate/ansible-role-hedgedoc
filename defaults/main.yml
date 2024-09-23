@@ -100,4 +100,10 @@ hedgedoc_cfg:
     #   connectionString: change this
     #   container: change this
 
+## --------------------------
+## HedgeDocの環境変数
+## @see https://docs.hedgedoc.org/configuration/
+## --------------------------
+hedgedoc_envs: {}
+
 # hedgedoc_allow_connect_other_host: false
