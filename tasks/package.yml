@@ -1,4 +1,19 @@
 ---
+- name: Check file exists package.json
+  ansible.builtin.stat:
+    path: "{{ hedgedoc_root }}/package.json"
+  register: package_json_result
+- name: Gather current install version
+  when: package_json_result.stat.exists
+  block:
+    - name: Get package.json content
+      ansible.builtin.command:
+        cmd: cat {{ hedgedoc_root }}/package.json
+      changed_when: false
+      register: cat_result
+    - name: Set current install version
+      ansible.builtin.set_fact:
+        installed_hedgedoc_version: "{{ (cat_result.stdout | from_json)['version'] }}"
 - name: Set Install version variable
   when: hedgedoc_version == 'latest'
   block:
@@ -21,9 +36,11 @@
     - name: Set hedgedoc_version variable
       ansible.builtin.set_fact:
         hedgedoc_version: "{{ latest_release.json.tag_name }}"
-- name: Setup HedgeDoc
+- name: Install/update HedgeDoc
   become: true
   become_user: "{{ hedgedoc_user }}"
+  when: hedgedoc_version is version(installed_hedgedoc_version | default('0.0.0'), '!=')
+  notify: Restart hedgedoc
   block:
     - name: Install/update HedgeDoc
       ansible.builtin.unarchive:
@@ -32,7 +49,6 @@
         extra_opts:
           - --strip-components=1
         remote_src: true
-      notify: Restart hedgedoc
     - name: Install/update all packages in package.json
       ansible.builtin.command:
         cmd: yarn workspaces focus{% if hedgedoc_mode == 'production' %} --production{% endif %}
