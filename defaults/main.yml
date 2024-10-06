@@ -17,6 +17,7 @@ hedgedoc_cfg:
     # protocolUseSSL: true
     # path: /var/run/hedgedoc/hedgedoc.sock
     sessionSecret: "{{ inventory_hostname | hash('sha1') }}"
+    # allowAnonymous: true
     db:
       ## dialect: mysql / mariadb / postgres / sqlite
       dialect: mariadb
