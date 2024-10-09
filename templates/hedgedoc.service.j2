@@ -13,7 +13,7 @@ After=postgresql.service
 {% endif %}
 
 [Service]
-Type=simple
+Type=exec
 Environment=NODE_ENV={{ hedgedoc_mode }}
 EnvironmentFile=/etc/default/hedgedoc
 User={{ hedgedoc_user }}
