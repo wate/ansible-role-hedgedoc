@@ -13,14 +13,16 @@ After=postgresql.service
 {% endif %}
 
 [Service]
-Type=exec
+Type=simple
 Environment=NODE_ENV={{ hedgedoc_mode }}
+Environment=CMD_CONFIG_FILE={{ hedgedoc_root }}/config.json
 EnvironmentFile=/etc/default/hedgedoc
 User={{ hedgedoc_user }}
 Group={{ hedgedoc_group }}
 WorkingDirectory={{ hedgedoc_root }}
 ExecStart=/usr/bin/yarn start
 Restart=always
+RestartSec=2s
 
 [Install]
 WantedBy=multi-user.target
