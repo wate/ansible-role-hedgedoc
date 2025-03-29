@@ -1,5 +1,11 @@
 ---
+## ---------
 ## @see https://ansible-lint.readthedocs.io/configuring/
+## ---------
+
+## min, basic, moderate,safety, shared, production
+# profile: null
+
 use_default_rules: true
 
 ## 除外するディレクトリ/ファイル
@@ -14,6 +20,7 @@ use_default_rules: true
 ## 無効にするルール
 skip_list:
   - role-name
+  - name[casing]
 
 ## 警告として扱うルール
 warn_list:
@@ -33,7 +40,6 @@ warn_list:
   - yaml[document-start]
   - yaml[truthy]
   ## custom
-  - name[casing]
   - no-changed-when
   - no-handler
 

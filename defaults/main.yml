@@ -107,5 +107,3 @@ hedgedoc_cfg:
 ## @see https://docs.hedgedoc.org/configuration/
 ## --------------------------
 hedgedoc_envs: {}
-
-# hedgedoc_allow_connect_other_host: false
