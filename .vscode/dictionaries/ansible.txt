@@ -1,5 +1,13 @@
+ansible
 blockinfile
+chdir
 cronvar
+elif
+endfor
+fileglob
 lineinfile
+linux
+posix
 selectattr
 subelements
+wantlist

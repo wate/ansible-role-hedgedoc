@@ -1,3 +1,4 @@
+envrc
 libmariadb
 mysqld
 postgres
