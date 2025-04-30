@@ -1,3 +1,5 @@
+direnv
+dotenv
 hedgedoc
 mariadb
 mysql
