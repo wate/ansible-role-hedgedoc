@@ -24,9 +24,11 @@
     - name: Assert service
       ansible.builtin.assert:
         that:
-          - ansible_facts.services['hedgedoc.service']
-          - ansible_facts.services['hedgedoc.service']['state'] == 'running'
-          - ansible_facts.services['hedgedoc.service']['status'] == 'enabled'
+          - "'hedgedoc.service' in ansible_facts.services"
+          - ansible_facts.services['hedgedoc.service'].state == 'running'
+          - ansible_facts.services['hedgedoc.service'].status == 'enabled'
+        fail_msg: "HedgeDoc service is not running or not enabled"
+        success_msg: "HedgeDoc service is running and enabled"
     ## 待ち受けポートの検証
     - name: Check unix domain socket file
       ansible.builtin.stat:
@@ -37,3 +39,5 @@
         that:
           - sock_file_result.stat.exists
           - sock_file_result.stat.issock
+        fail_msg: "HedgeDoc socket not found or not a socket"
+        success_msg: "HedgeDoc socket exists and is a socket"

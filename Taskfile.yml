@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: '3'
+tasks:
+  default:
+    desc: Run Molecule tests for default scenario
+    cmd: molecule test
+  all:
+    desc: Run Molecule tests for all scenarios (sequential)
+    cmds:
+      - task: default
