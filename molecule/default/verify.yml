@@ -24,9 +24,9 @@
     - name: Assert service
       ansible.builtin.assert:
         that:
-          - "'hedgedoc.service' in ansible_facts.services"
-          - ansible_facts.services['hedgedoc.service'].state == 'running'
-          - ansible_facts.services['hedgedoc.service'].status == 'enabled'
+          - ansible_facts.services['hedgedoc.service'] is defined
+          - ansible_facts.services['hedgedoc.service']['state'] == 'running'
+          - ansible_facts.services['hedgedoc.service']['status'] == 'enabled'
         fail_msg: "HedgeDoc service is not running or not enabled"
         success_msg: "HedgeDoc service is running and enabled"
     ## 待ち受けポートの検証
