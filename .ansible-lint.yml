@@ -29,6 +29,7 @@ warn_list:
   - experimental
   - fqcn[action]
   - fqcn[redirect]
+  - fqcn[canonical]
   - jinja[spacing]
   - name[play]
   - name[prefix]
