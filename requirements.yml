@@ -1,0 +1,5 @@
+---
+## ロール実行に必要なコレクション
+collections:
+  - name: ansible.mariadb
+  - name: community.postgresql
